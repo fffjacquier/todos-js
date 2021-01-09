@@ -28,9 +28,10 @@
       title: str,
       completed: false,
     }
-    let _todos = [...todos, _todo]
-    saveState(_todos)
-    renderTodos(_todos)
+    //const _todos = [...todos, _todo]
+    todos.push(_todo)
+    saveState(todos)
+    renderTodos(todos)
   }
 
   function renderTodos(todos) {
@@ -81,7 +82,7 @@
 
   function checkboxChanged(todo, event) {
     todo.completed = event.target.checked
-    saveState(todos)
+    //saveState(todos)
   }
 
   function todoDblClicked(todo) {
@@ -92,9 +93,11 @@
   }
 
   function deleteButtonPressed(todo) {
-    let _todos = todos.filter((td) => td._id !== todo._id)
-    saveState(_todos)
-    renderTodos(_todos)
+    const li = document.getElementById('li_' + todo._id)
+    li.parentNode.removeChild(li)
+    todos = todos.filter((td) => td._id !== todo._id)
+    saveState(todos)
+    renderTodos(todos)
   }
 
   function todoKeyPressed(todo, event) {
